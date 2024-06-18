@@ -1,1 +1,3 @@
-# vite-plugin-siyuan
+## 思源 vite 开发插件
+
+可通过此插件连接 vite 启动的服务，自动加载和卸载插件
