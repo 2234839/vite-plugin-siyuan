@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sources":["../../src/vite-plugin-siyuan/index.ts"],"sourcesContent":["// 引入这个变量后 vite 会自动注入 hot\r\nimport.meta.hot\r\nimport \"./icon.png\"\r\nconsole.log(222,import.meta.url);\r\n\r\nexport const run = 222\r\n"],"names":[],"mappings":";;AAGA,QAAQ,IAAI,yLAAmB;"}
