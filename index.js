@@ -45,14 +45,14 @@ class VitePlugin extends siyuan.Plugin {
         name: pluginName,
         i18n: {}
       });
+      const oldPlugin = this.app.plugins.find((el) => el.name === pluginName);
+      oldPlugin == null ? void 0 : oldPlugin.onunload();
       this.app.plugins.push(plugin);
       plugin.onload();
       if (this.layoutRead) {
         plugin.onLayoutReady();
       }
       console.log("[load plugin]", { module: module2, pluginClass, plugin });
-      const oldPlugin = this.app.plugins.find((el) => el.name === pluginName);
-      oldPlugin == null ? void 0 : oldPlugin.onunload();
     });
   }
   async setViteUrl(url) {
