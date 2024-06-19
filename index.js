@@ -38,10 +38,11 @@ class VitePlugin extends siyuan.Plugin {
     }
     import(moduleSrc).then((module2) => {
       const pluginClass = module2.default;
+      const pluginName = name || pluginClass.name;
       const plugin = new pluginClass({
         app: this.app,
-        displayName: name || pluginClass.name,
-        name: name || pluginClass.name,
+        displayName: pluginName,
+        name: pluginName,
         i18n: {}
       });
       this.app.plugins.push(plugin);
@@ -50,6 +51,8 @@ class VitePlugin extends siyuan.Plugin {
         plugin.onLayoutReady();
       }
       console.log("[load plugin]", { module: module2, pluginClass, plugin });
+      const oldPlugin = this.app.plugins.find((el) => el.name === pluginName);
+      oldPlugin == null ? void 0 : oldPlugin.onunload();
     });
   }
   async setViteUrl(url) {
