@@ -24,15 +24,24 @@ class VitePlugin extends siyuan.Plugin {
   onLayoutReady() {
     this.layoutRead = true;
   }
-  loadByUrl(url) {
+  async loadByUrl(url) {
     this.saveData("url", url);
-    let src = `${url}?t=${Date.now()}`;
-    import(src).then((module2) => {
+    let moduleSrc = `${url}?t=${Date.now()}`;
+    console.log("[url]", url);
+    let name = "";
+    if (url.endsWith("/index.ts")) {
+      const pluginJSON = await fetch(
+        url.replace(/\/index\.ts$/, "/plugin.json")
+      ).then((r) => r.json());
+      console.log("[pluginJSON]", pluginJSON);
+      name = pluginJSON.name;
+    }
+    import(moduleSrc).then((module2) => {
       const pluginClass = module2.default;
       const plugin = new pluginClass({
         app: this.app,
-        displayName: pluginClass.name,
-        name: pluginClass.name,
+        displayName: name || pluginClass.name,
+        name: name || pluginClass.name,
         i18n: {}
       });
       this.app.plugins.push(plugin);
