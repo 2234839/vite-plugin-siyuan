@@ -19,13 +19,15 @@ class VitePlugin extends siyuan.Plugin {
     globalThis.vitePlugin = this;
     const url = await this.loadData("url");
     if (!url) return;
-    this.loadByUrl(url);
+    this.loadByUrl(url, false);
   }
   onLayoutReady() {
     this.layoutRead = true;
   }
-  async loadByUrl(url) {
-    this.saveData("url", url);
+  async loadByUrl(url, save = true) {
+    if (save) {
+      this.saveData("url", url);
+    }
     let moduleSrc = `${url}?t=${Date.now()}`;
     console.log("[url]", url);
     if (url.endsWith("/index.ts")) ;
@@ -34,9 +36,9 @@ class VitePlugin extends siyuan.Plugin {
       import(moduleSrc)
     ]).then(([pluginJSON, module2]) => {
       console.log("[pluginJSON]", pluginJSON);
-      const name2 = pluginJSON.name;
+      const name = pluginJSON.name;
       const pluginClass = module2.default;
-      const pluginName = name2 || pluginClass.name;
+      const pluginName = name || pluginClass.name;
       const plugin = new pluginClass({
         app: this.app,
         displayName: pluginName,
