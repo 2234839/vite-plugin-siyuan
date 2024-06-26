@@ -8,7 +8,6 @@ function synchronousFetch(url2, data) {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url2, false);
     xhr.onload = function() {
-      console.log("[xhr]", xhr);
       if (xhr.status === 200) {
         resolve(xhr.responseText);
       } else {
