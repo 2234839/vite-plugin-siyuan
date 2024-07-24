@@ -23,7 +23,7 @@ function synchronousFetch(url2, data) {
 const name = "vite-plugin-siyuan";
 const author = "崮生";
 const url = "https://github.com/2234839/vite-plugin-siyuan";
-const version = "0.0.24";
+const version = "0.0.25";
 const minAppVersion = "2.10.3";
 const backends = [
   "all"
@@ -45,7 +45,7 @@ const readme = {
 };
 const funding = {
   custom: [
-    "https://afdian.net/@llej0"
+    "https://afdian.com/@llej0"
   ]
 };
 const pluginJSON = {
